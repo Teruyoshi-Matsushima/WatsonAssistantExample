@@ -1,0 +1,292 @@
+{
+  "intents": [
+    {
+      "intent": "weather",
+      "examples": [
+        {
+          "text": "今日は晴れるかな"
+        },
+        {
+          "text": "天気予報を知りたい"
+        },
+        {
+          "text": "明日の天気は大丈夫かな"
+        },
+        {
+          "text": "明日の東京の天気を知りたい"
+        }
+      ],
+      "description": ""
+    },
+    {
+      "intent": "greeting",
+      "examples": [
+        {
+          "text": "こんばんわ"
+        },
+        {
+          "text": "こんにちは"
+        },
+        {
+          "text": "やあ"
+        },
+        {
+          "text": "どうも"
+        },
+        {
+          "text": "おはよう"
+        }
+      ],
+      "description": ""
+    }
+  ],
+  "entities": [
+    {
+      "entity": "sys-date",
+      "values": [],
+      "fuzzy_match": true
+    },
+    {
+      "entity": "city",
+      "values": [
+        {
+          "type": "synonyms",
+          "value": "大阪",
+          "synonyms": []
+        },
+        {
+          "type": "synonyms",
+          "value": "札幌",
+          "synonyms": []
+        },
+        {
+          "type": "synonyms",
+          "value": "東京",
+          "synonyms": []
+        }
+      ],
+      "fuzzy_match": true
+    }
+  ],
+  "metadata": {
+    "api_version": {
+      "major_version": "v2",
+      "minor_version": "2018-11-08"
+    }
+  },
+  "dialog_nodes": [
+    {
+      "type": "standard",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "<?$city?>の<?$date_literal?>の天気をお調べします。"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_1_1594955837141",
+      "context": {
+        "date": "@sys-date",
+        "date_literal": "@sys-date.literal"
+      },
+      "conditions": "@sys-date",
+      "dialog_node": "node_8_1594956252055"
+    },
+    {
+      "type": "standard",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "別の場所を指定して下さい。"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_10_1594955693858",
+      "next_step": {
+        "behavior": "jump_to",
+        "selector": "user_input",
+        "dialog_node": "node_10_1594955693858"
+      },
+      "conditions": "true",
+      "dialog_node": "node_2_1594955967168",
+      "previous_sibling": "node_1_1594955837141"
+    },
+    {
+      "type": "standard",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "<?$city?>の天気をお調べします。"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          },
+          {
+            "values": [
+              {
+                "text": "いつの天気をお調べしますか？選択肢にない場合は入力して下さい。"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          },
+          {
+            "title": "",
+            "options": [
+              {
+                "label": "今日",
+                "value": {
+                  "input": {
+                    "text": "今日"
+                  }
+                }
+              },
+              {
+                "label": "明日",
+                "value": {
+                  "input": {
+                    "text": "明日"
+                  }
+                }
+              }
+            ],
+            "description": "",
+            "response_type": "option"
+          }
+        ]
+      },
+      "parent": "node_10_1594955693858",
+      "context": {
+        "city": "@city"
+      },
+      "conditions": "@city",
+      "dialog_node": "node_1_1594955837141"
+    },
+    {
+      "type": "standard",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "こんにちは！天気予報を調べるチャットボットです。"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "ようこそ",
+      "conditions": "#greeting",
+      "dialog_node": "node_5_1594955582084"
+    },
+    {
+      "type": "standard",
+      "title": "その他",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "解釈できませんでした。申し訳ありませんが違う表現を試していただけますか。"
+              },
+              {
+                "text": "恐れ入りますが表現を変えていただけますか。解釈できませんでした。"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "conditions": "anything_else",
+      "dialog_node": "その他",
+      "previous_sibling": "node_10_1594955693858",
+      "disambiguation_opt_out": true
+    },
+    {
+      "type": "standard",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "天気予報をお調べします。"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          },
+          {
+            "values": [
+              {
+                "text": "どこの天気をお調べましすか？"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "conditions": "#weather",
+      "dialog_node": "node_10_1594955693858",
+      "previous_sibling": "ようこそ"
+    },
+    {
+      "type": "standard",
+      "title": "ようこそ",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "いらっしゃいませ。ご用件を入力してください。"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "conditions": "welcome",
+      "dialog_node": "ようこそ"
+    }
+  ],
+  "counterexamples": [],
+  "system_settings": {
+    "disambiguation": {
+      "prompt": "もしかして",
+      "enabled": true,
+      "randomize": true,
+      "max_suggestions": 5,
+      "suggestion_text_policy": "title",
+      "none_of_the_above_prompt": "上記のいずれにも該当し"
+    },
+    "system_entities": {
+      "enabled": true
+    },
+    "human_agent_assist": {
+      "prompt": "もしかして"
+    }
+  },
+  "learning_opt_out": false,
+  "name": "Sample Skill",
+  "language": "ja",
+  "description": ""
+}

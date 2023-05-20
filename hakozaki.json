@@ -1,0 +1,517 @@
+{
+  "intents": [
+    {
+      "intent": "見たい",
+      "examples": [
+        {
+          "text": "史跡一覧を見たい"
+        },
+        {
+          "text": "史跡を見たい"
+        },
+        {
+          "text": "お勧めの場所を教えて"
+        },
+        {
+          "text": "お勧めの場所は"
+        },
+        {
+          "text": "名所巡りしたい"
+        },
+        {
+          "text": "名所を知りたい"
+        },
+        {
+          "text": "名所を見たい"
+        },
+        {
+          "text": "名所を回りたい"
+        }
+      ],
+      "description": ""
+    },
+    {
+      "intent": "食べたい",
+      "examples": [
+        {
+          "text": "お昼を食べたい"
+        },
+        {
+          "text": "食事がしたい"
+        },
+        {
+          "text": "お腹がすいた"
+        },
+        {
+          "text": "夕食を食べたい"
+        }
+      ],
+      "description": ""
+    },
+    {
+      "intent": "greeting",
+      "examples": [
+        {
+          "text": "こんばんわ"
+        },
+        {
+          "text": "こんにちは"
+        },
+        {
+          "text": "やあ"
+        },
+        {
+          "text": "どうも"
+        },
+        {
+          "text": "おはよう"
+        }
+      ]
+    }
+  ],
+  "entities": [
+    {
+      "entity": "ラーメン",
+      "values": [
+        {
+          "type": "synonyms",
+          "value": "ラーメン",
+          "synonyms": [
+            "ラーメン"
+          ]
+        }
+      ],
+      "fuzzy_match": true
+    },
+    {
+      "entity": "甘酒横丁",
+      "values": [
+        {
+          "type": "synonyms",
+          "value": "甘酒横丁",
+          "synonyms": [
+            "甘酒横丁"
+          ]
+        }
+      ],
+      "fuzzy_match": true
+    },
+    {
+      "entity": "中華料理",
+      "values": [
+        {
+          "type": "synonyms",
+          "value": "中華料理",
+          "synonyms": [
+            "中華料理",
+            "餃子",
+            "麻婆豆腐",
+            "青椒肉絲",
+            "エビチリ",
+            "坦々麺"
+          ]
+        }
+      ],
+      "fuzzy_match": true
+    },
+    {
+      "entity": "タイ料理",
+      "values": [
+        {
+          "type": "synonyms",
+          "value": "タイ料理",
+          "synonyms": [
+            "タイ料理",
+            "グリーンカレー",
+            "トムヤムクン",
+            "ガパオ",
+            "タイラーメン"
+          ]
+        }
+      ],
+      "fuzzy_match": true
+    },
+    {
+      "entity": "水天宮",
+      "values": [
+        {
+          "type": "synonyms",
+          "value": "suitengu",
+          "synonyms": [
+            "水天宮"
+          ]
+        }
+      ],
+      "fuzzy_match": true
+    },
+    {
+      "entity": "名所",
+      "values": [
+        {
+          "type": "synonyms",
+          "value": "famous_place",
+          "synonyms": [
+            "名所",
+            "水天宮",
+            "史跡",
+            "甘酒横丁"
+          ]
+        }
+      ],
+      "fuzzy_match": true
+    },
+    {
+      "entity": "鳥料理",
+      "values": [
+        {
+          "type": "synonyms",
+          "value": "鳥料理",
+          "synonyms": [
+            "親子丼",
+            "炭火焼親子丼"
+          ]
+        }
+      ],
+      "fuzzy_match": true
+    }
+  ],
+  "metadata": {
+    "api_version": {
+      "major_version": "v2",
+      "minor_version": "2018-11-08"
+    },
+    "from-sample": true
+  },
+  "dialog_nodes": [
+    {
+      "type": "response_condition",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "甘酒横丁はこちらです。http://amazakeyokocho.jp/"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_5_1595228305517",
+      "conditions": "@甘酒横丁",
+      "dialog_node": "response_10_1595228718373",
+      "previous_sibling": "response_6_1595228400613"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "名所案内はこちらです。https://aumo.jp/articles/36663"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_5_1595228305517",
+      "conditions": "#見たい",
+      "dialog_node": "response_5_1595228499016",
+      "previous_sibling": "response_10_1595228718373"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "水天宮はこちらです。http://www.suitengu.or.jp/"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_5_1595228305517",
+      "conditions": "@水天宮",
+      "dialog_node": "response_6_1595228400613"
+    },
+    {
+      "type": "standard",
+      "title": "鳥料理",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "こちらがおすすめです。元祖炭火焼親子丼は是非一度お試しください。　https://tabelog.com/tokyo/A1302/A130204/13008061/"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_8_1595229110041",
+      "conditions": "@鳥料理",
+      "dialog_node": "node_6_1595517277312",
+      "previous_sibling": "node_10_1595333040505"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "ラーメンはこちらを参照ください。https://rtrp.jp/articles/22233/"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_8_1595229110041",
+      "conditions": "@ラーメン",
+      "dialog_node": "response_1_1595858478130",
+      "previous_sibling": "response_3_1595858288549"
+    },
+    {
+      "type": "standard",
+      "title": "ラーメン",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "ラーメンはこちらを参照ください。https://rtrp.jp/articles/22233/"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_8_1595229110041",
+      "conditions": "@ラーメン",
+      "dialog_node": "node_9_1595858717967",
+      "previous_sibling": "node_6_1595517277312"
+    },
+    {
+      "type": "standard",
+      "title": "中華料理",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "中華料理はここがおすすめです。四川亭 人形町店　https://tabelog.com/tokyo/A1302/A130204/13015442/\n餃子だったらここもいいかも　紅虎餃子房 人形町店　https://tabelog.com/tokyo/A1302/A130204/13018109/"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_8_1595229110041",
+      "conditions": "@中華料理",
+      "dialog_node": "node_10_1595332821946",
+      "previous_sibling": "response_9_1595858328773"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "こちらがおすすめです。元祖炭火焼親子丼は是非一度お試しください。　https://tabelog.com/tokyo/A1302/A130204/13008061/"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_8_1595229110041",
+      "conditions": "@鳥料理",
+      "dialog_node": "response_3_1595858288549",
+      "previous_sibling": "response_1_1595858261380"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "何が食べたいですか？"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_8_1595229110041",
+      "conditions": "#食べたい",
+      "dialog_node": "response_9_1595858328773",
+      "previous_sibling": "response_1_1595858478130"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "タイ料理はここがおすすめです。亜州食道　https://tabelog.com/tokyo/A1302/A130204/13015424/"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_8_1595229110041",
+      "conditions": "@タイ料理",
+      "dialog_node": "response_1_1595858261380",
+      "previous_sibling": "response_10_1595858178708"
+    },
+    {
+      "type": "standard",
+      "title": "タイ料理",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "タイ料理はここがおすすめです。亜州食道　https://tabelog.com/tokyo/A1302/A130204/13015424/"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_8_1595229110041",
+      "conditions": "@タイ料理",
+      "dialog_node": "node_10_1595333040505",
+      "previous_sibling": "node_10_1595332821946"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "中華料理はここがおすすめです。四川亭 人形町店　https://tabelog.com/tokyo/A1302/A130204/13015442/ 餃子だったらここもいいかも　紅虎餃子房 人形町店　https://tabelog.com/tokyo/A1302/A130204/13018109/"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_8_1595229110041",
+      "conditions": "@中華料理",
+      "dialog_node": "response_10_1595858178708"
+    },
+    {
+      "type": "standard",
+      "title": "食べたい",
+      "metadata": {
+        "_customization": {
+          "mcr": true
+        }
+      },
+      "conditions": "#食べたい",
+      "dialog_node": "node_8_1595229110041",
+      "previous_sibling": "node_5_1595228305517"
+    },
+    {
+      "type": "standard",
+      "title": "その他",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "こんにちは！"
+              },
+              {
+                "text": "恐れ入りますが表現を変えていただけますか。解釈できませんでした。"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "conditions": "anything_else",
+      "dialog_node": "その他",
+      "previous_sibling": "node_8_1595229110041",
+      "disambiguation_opt_out": true
+    },
+    {
+      "type": "standard",
+      "title": "見たい",
+      "metadata": {
+        "_customization": {
+          "mcr": true
+        }
+      },
+      "conditions": "#見たい",
+      "dialog_node": "node_5_1595228305517",
+      "previous_sibling": "ようこそ"
+    },
+    {
+      "type": "standard",
+      "title": "ようこそ",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "こんにちは。箱崎周辺の案内をしています。ちなみに私は辛い料理が好きです。"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "conditions": "#greeting",
+      "dialog_node": "ようこそ"
+    }
+  ],
+  "counterexamples": [],
+  "system_settings": {
+    "disambiguation": {
+      "prompt": "もしかして",
+      "enabled": true,
+      "randomize": true,
+      "max_suggestions": 5,
+      "suggestion_text_policy": "title",
+      "none_of_the_above_prompt": "上記のいずれにも該当し"
+    },
+    "system_entities": {
+      "enabled": true
+    },
+    "human_agent_assist": {
+      "prompt": "もしかして"
+    }
+  },
+  "learning_opt_out": false,
+  "name": "1st skill in Japanese",
+  "language": "ja",
+  "description": ""
+}
