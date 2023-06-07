@@ -10,7 +10,7 @@ assistant = AssistantV2(
     version = '2023-05-20',
     authenticator = authenticator
 )
-assistant.set_service_url('https://api.jp-tok.assistant.watson.cloud.ibm.com/instances/4a935a11-2fdf-4d93-bde7-444776ec1052') # replace with service instance URL  資格情報
+assistant.set_service_url('https://api.jp-tok.assistant.watson.cloud.ibm.com/instances/xxxxxxxxxxxxxxxxxx') # replace with service instance URL  資格情報
 assistant_id = 'xxxxxxxxxxxxxx' # replace with environment ID
  
 response = assistant.message(
